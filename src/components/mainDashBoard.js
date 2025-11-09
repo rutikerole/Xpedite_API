@@ -43,56 +43,59 @@ function MainDashboard() {
 
   // 🧠 Load both request + response when switching tabs
   useEffect(() => {
-    if (!activeCollectionId) return;
-    const data = getActiveCollectionData();
+  if (!activeCollectionId) return;
+  const data = getActiveCollectionData();
 
-    setSelected(data.method || "GET");
-    setReqURL(data.url || "");
-    setParams(data.params || [{ key: "", value: "" }]);
-    setReqHeaders(data.headers || [{ key: "", value: "" }]);
-    setReqBody(data.body || "");
-    setAuthType(data.authType || "Bearer");
-    setAuthValue(data.authValue || "");
+  setSelected(data.method || "GET");
+  setReqURL(data.url || "");
+  setParams(data.params || [{ key: "", value: "" }]);
+  setReqHeaders(data.headers || [{ key: "", value: "" }]);
+  setReqBody(data.body || "");
+  setAuthType(data.authType || "Bearer");
+  setAuthValue(data.authValue || "");
 
-    // response
-    setUrlData(data.response || null);
-    setResponseHeaders(data.responseHeaders || {});
-    setError(data.error || null);
-    setStatus(data.status || null);
-    setTimeTaken(data.timeTaken || null);
-  }, [activeCollectionId]);
+  setUrlData(data.response || null);
+  setResponseHeaders(data.responseHeaders || {});
+  setError(data.error || null);
+  setStatus(data.status || null);
+  setTimeTaken(data.timeTaken || null);
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [activeCollectionId]);
 
   // 💾 Save request+response data per collection
   useEffect(() => {
-    if (!activeCollectionId) return;
-    updateCollectionData(activeCollectionId, {
-      method: selected,
-      url: reqURL,
-      params,
-      headers: reqHeaders,
-      body: reqBody,
-      authType,
-      authValue,
-      response: urlData,
-      responseHeaders,
-      error,
-      status,
-      timeTaken,
-    });
-  }, [
-    selected,
-    reqURL,
+  if (!activeCollectionId) return;
+  updateCollectionData(activeCollectionId, {
+    method: selected,
+    url: reqURL,
     params,
-    reqHeaders,
-    reqBody,
+    headers: reqHeaders,
+    body: reqBody,
     authType,
     authValue,
-    urlData,
+    response: urlData,
     responseHeaders,
     error,
     status,
     timeTaken,
-  ]);
+  });
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [
+  selected,
+  reqURL,
+  params,
+  reqHeaders,
+  reqBody,
+  authType,
+  authValue,
+  urlData,
+  responseHeaders,
+  error,
+  status,
+  timeTaken,
+]);
+
 
   // ✅ Build query string
   const buildQueryString = (params) => {
