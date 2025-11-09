@@ -1,24 +1,23 @@
 // Import the functions you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // if you want DB
-import { getAuth } from "firebase/auth"; // if you want auth
-import { getStorage } from "firebase/storage"; // if you want file storage
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
-// Your web app's Firebase configuration
+// Firebase configuration using environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyDocn2_1-tG2DIdHK4a1px9Lv6yKPCaYV0",
-  authDomain: "xpedite-api.firebaseapp.com",
-  projectId: "xpedite-api",
-  storageBucket: "xpedite-api.appspot.com",
-  messagingSenderId: "841303161005",
-  appId: "1:841303161005:web:0bb4baab93d0831895ee24",
-  measurementId: "G-JGN12MV9WF",
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Export services you want
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
